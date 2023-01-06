@@ -1,0 +1,87 @@
+/* ============================================
+; Title:  site.css
+; Author: Professor Krasso
+; Date:   06 January 2023
+; Modified By: Yakut Ahmedin
+; Description: Global style
+;=========================================== */
+/* 
+    Style add in week-1 assignment instruction
+*/
+#container {
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+#icon-mode:hover {
+    cursor: pointer;
+}
+
+#icon-text {
+    padding-left: 10px;
+}
+
+.pull-right {
+    float: right;
+    margin-top: -30px;
+    margin-right: 100px;
+}
+#icon-text{
+    font-size: 1.4rem;
+}
+/**
+    Style add in Requirements JavaScript document Exhibit D.
+ */
+ .assign-container {
+    padding: 10px;
+}
+.assign-content {
+    width: 600px;
+    margin: 3% auto 0;
+}
+.assign-results-text {
+    text-align: center;
+    font-size: 28px;
+}
+
+
+/* 
+     reusing the styles cames from WEB 200
+*/
+.app-header {
+    text-align: center;
+    font-weight: 400;
+    border: none;
+    color: inherit;
+    background-color: inherit;
+}
+
+.return-home {
+    color: #4F3674;
+    text-decoration: none;
+}
+
+.return-home:hover {
+    background-color: #D6A800;
+    color: #4F3674;
+}
+
+/* pseudo visited style to return btn */
+.return-home:visited {
+    color: #3C275A;
+}
+
+/* form field syles start here */
+.form {
+    display: inline-grid;
+    grid-template-columns: auto;
+}
+
+.form-field {
+    padding: 20px;
+}
+
+.full-width {
+    width: 100%;
+}
