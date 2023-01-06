@@ -1,2 +1,6 @@
-# web-330
-web-330 GitHub repository
+<h1>WEB 330 Enterprise JavaScript II</h1>
+<h2>Contributors</h2>
+<ul>
+  <li>Professor Krasso</li>
+  <li>Yakut Ahmedin</li>
+</ul>
