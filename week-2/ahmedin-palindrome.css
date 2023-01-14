@@ -112,9 +112,8 @@ footer a:visited {
 }
 
 
-/* media to input card element */
-@media(max-width: 768px ) {
-    .card{
+@media(max-width: 792px) {
+    .card {
         width: 100%;
     }
 }
