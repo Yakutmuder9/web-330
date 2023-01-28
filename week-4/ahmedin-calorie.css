@@ -1,0 +1,20 @@
+/* ============================================
+; Title:  Assignment 4 – Calorie App
+; Author: Professor Krasso
+; Date:   27 January 2023
+; Modified By: Yakut Ahmedin
+; Description: Calorie App!!
+;=========================================== */
+
+#foodList {
+    float: right;
+    color: #df546a;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+@media(max-width: 762px) {
+    .card {
+        width: 100%!important;
+    }
+}

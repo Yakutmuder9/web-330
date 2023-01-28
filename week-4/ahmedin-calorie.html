@@ -1,0 +1,143 @@
+<!--
+============================================
+; Title:  Assignment 4 – Calorie App
+; Author: Professor Krasso
+; Date:   27 January 2023
+; Modified By: Yakut Ahmedin
+; Description: Calorie App!!
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB 330 – Enterprise JavaScript II</title>
+
+    <!-- link to golbal and theme styles -->
+    <link rel="stylesheet" type="text/css" href="../site.css">
+    <link rel="stylesheet" type="text/css" href="../theme.css">
+    <link rel="stylesheet" type="text/css" href="./ahmedin-calorie.css">
+
+    <!-- Google fonts for Oswald -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- icons cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- link to externa product js -->
+    <script type="module" src="./food-model.js"></script>
+
+</head>
+
+<body class="light-theme">
+    <div id="container">
+
+        <!-- page title -->
+        <h1 class="app-header">Welcome to the Calorie App!</h1>
+
+        <!-- open alert modal when a button is clicked.-->
+        <div class="card">
+            <div class="card-title">
+                Calorie Search Form
+            </div>
+
+            <!--  value insertion form -->
+            <div class="card-content">
+                <div class="form">
+                    <div class="form-field">
+                        <label for="txtFoodItem">Enter a food item:</label>
+                        <input type="text" id="txtFoodItem" class="input" name="txtFoodItem" />
+
+                        <span id="foodList"></span>
+                    </div>
+                    <div class="form-field">
+                        <button type="submit" class="btn btn-primary full-width" id="btnSearch">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer>
+            <!-- return to home page -->
+            <a href="https://yakutmuder9.github.io/web-330">Return</a>
+        </footer>
+
+
+        <!-- Search Results value show up card -->
+        <div class="card">
+            <div class="card-title">
+                Search Results
+            </div>
+            <br />
+
+            <!-- changed value -->
+            <div class="card-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Calories</th>
+                        </tr>
+                    </thead>
+                    <tbody id="searchResults">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script type="module">
+        import { CalorieConverter } from './calorie-converter.js';
+        // Create a variable named txtFoodItemEl and assign it the txtFoodItem input field
+        const txtFoodItemEl = document.getElementById("txtFoodItem")
+
+        // Register onclick event for the btnSearch element
+        document.getElementById("btnSearch").onclick = function () {
+            // Create a variable named txtFoodItem and assign it the inputted value
+            const txtFoodItem = txtFoodItemEl.value
+
+            // Create a variable named foods and call a CalorieConverter function
+            let foods = CalorieConverter.find(txtFoodItem.toLowerCase());
+
+            let tableData = "<table>";
+            for (let food of foods) {
+                tableData += `<tr><td>${food.name}</td><td>${food.calories}</td></tr>`;
+            }
+            // close the opening table tag
+            tableData += "</table>";
+
+            // bind the results tableData to the searchResults div.
+            document.getElementById("searchResults").innerHTML = tableData;
+        };
+
+        // find the btnSearch field and invoke the click() function when “Enter” key is pressed.  
+        txtFoodItemEl.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                document.getElementById("btnSearch").click();
+            }
+        });
+
+        // Create a foodList variable and call the static data
+        let foodList = CalorieConverter.data;
+        let foodListData = "";
+
+        // append the food.name to the variable string
+        for (let food of foodList) {
+            foodListData += "<i>" + food.name + "</i>" + ", ";
+        }
+        
+        // remove last comma 
+        foodListData = foodListData.slice(0, -2);
+
+        // bind the results to the foodList div’s innerHTML. 
+        document.getElementById("foodList").innerHTML = `<i>(Ex:</i> ${foodListData}<i>)</i>`;
+
+    </script>
+</body>
+
+</html>

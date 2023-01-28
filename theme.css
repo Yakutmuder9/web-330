@@ -27,6 +27,13 @@ body.light-theme {
     --btn-hover-color: #4F3674;
     --input-boarder-color: #ccc;
 
+    /* week-4 Additional Styling Requirements style */
+    --table-header-background-color: #4F3674;
+    --table-header-color: #fff;
+    --table-border-color: #ddd;
+    --table-hover-background-color: #D6A800;
+    --table-hover-color: #4F3674;
+
 }
 /* 
     dark theme root colors
@@ -49,6 +56,13 @@ body.dark-theme {
     --btn-hover-background-color: #764787;
     --btn-hover-color: #fff;
     --input-boarder-color: #303030;
+
+    /* week-4 Additional Styling Requirements style */
+    --table-header-background-color: #D176E1;
+    --table-header-color: #fff;
+    --table-border-color: #303030;
+    --table-hover-background-color: #7D4787;
+    --table-hover-color: #fff;
 }
 
 body {
@@ -142,7 +156,37 @@ h4 {
     box-sizing: border-box;
 }
 
-/* week-5 dropdown style */
+/* week dropdown style */
 .drop-down-menu {
     border: 1px solid var(--input-boarder-color);
+}
+
+
+/* week-4 Additional Styling Requirements style */
+table{
+    border-collapse: collapse;
+    width: auto;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--table-header-background-color);
+    color: var(--table-header-color);
+}
+
+table td, th{
+    border: 1px solid var(--table-border-color);
+    text-align: left;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.table-hover,  tr:hover {
+  background-color: var(--table-hover-background-color);
+  color: var(--table-hover-color);
+  cursor: pointer;
 }
