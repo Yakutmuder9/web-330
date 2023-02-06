@@ -1,0 +1,27 @@
+
+/* ============================================
+; Title:  Assignment 5 – Bob’s Automotive Repair Shop App
+; Author: Professor Krasso
+; Date:   05 February 2023
+; Modified By: Yakut Ahmedin
+; Description: Bob’s Automotive Repair Shop App!!
+;=========================================== */
+
+#cart-message {
+  float: right;
+  color: #df546a;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+/*  center the cart container */
+.cart-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
