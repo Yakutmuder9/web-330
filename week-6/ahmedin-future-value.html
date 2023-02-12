@@ -1,0 +1,194 @@
+<!--
+============================================
+; Title:  Future Value App
+; Author: Professor Krasso
+; Date:   10 February 2023
+; Modified By: Yakut Ahmedin
+; Description: Assignment 6 – Future Value App!!
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB 330 – Enterprise JavaScript II</title>
+
+    <!-- link to golbal and theme styles -->
+    <link rel="stylesheet" type="text/css" href="../site.css">
+    <link rel="stylesheet" type="text/css" href="../theme.css">
+    <link rel="stylesheet" type="text/css" href="./ahmedin-future-value.css">
+    <link rel="stylesheet" type="text/css" href="../flex-layout.css">
+
+    <!-- Google fonts for Oswald -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- icons cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+<body class="light-theme">
+    <div id="container">
+
+        <!-- page title -->
+        <h1 class="app-header">Welcome to the Future Value App!</h1>
+
+        <!-- open alert modal when a button is clicked.-->
+        <div class="card">
+            <div class="card-title">
+                Future Value Calculator
+            </div>
+
+            <div class="card-content">
+                <!--  value insertion form -->
+                <div class="form">
+                    <div class="form-field">
+                        <div class="row">
+                            <div class="danger col-12" id="errorLog"></div>
+                        </div>
+                        
+                        <label for="txtMonthlyPayment" class="form-label col-5">Monthly Payment:</label>
+                        <input type="text" id="txtMonthlyPayment" class="col-6 input" />
+
+                        <label for="txtYearlyRate" class="form-label col-5">Interest Rate:</label>
+                        <input type="text" id="txtYearlyRate" class="col-6 input" />
+
+                        <i class="danger">Enter 11% as 11.1</i>
+
+                        <label for="listNumOfYears" class="form-label col-5">Number of Years:</label>
+                        <select name="listNumOfYears" id="listNumOfYears" class="drop-down-menu input">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+
+
+                        <button class="btn btn-primary col-7 full-width" id="btnCalculate">
+                            Calculate
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+
+        <!-- return to home page -->
+        <a href="https://yakutmuder9.github.io/web-330">Return</a>
+
+
+
+        <!-- Search Results value show up card -->
+        <div class="card">
+            <div class="card-title">Calculation as of <span id="today"></span></div>
+            <br />
+
+            <!-- changed value -->
+            <div class="card-content assign-results-text" id="futureValue">
+                <!-- cartd Items showup in here -->
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { FinanceCalculator } from './finance-calculator.js';
+        import { Validator } from './validator.js';
+
+        // Setting the innerHTML of the today div
+        const todayDiv = document.getElementById("today");
+        today.innerHTML = new Date().toLocaleDateString('en-US');
+
+        // Registering an onclick event for btnCalculator
+        const btnCalculator = document.getElementById("btnCalculate");
+        btnCalculator.addEventListener("click", function () {
+            // Get the monthly payment
+            const monthlyPayment = document.getElementById("txtMonthlyPayment").value;
+
+            // Get the interest rate
+            const rate = document.getElementById("txtYearlyRate").value;
+
+            // Get the number of years
+            const years = document.getElementById("listNumOfYears").value;
+
+            // Get the error log element
+            const errorLogEl = document.getElementById("errorLog");
+
+            // Create a monthly payment validator
+            const monthlyPaymentValidator = new Validator("Monthly Payment", monthlyPayment);
+
+            // Make the field required
+            monthlyPaymentValidator.addRequiredField();
+
+            // Make the field a required float field
+            monthlyPaymentValidator.addRequiredFloatField();
+
+            // Make the field minimum value 100
+            monthlyPaymentValidator.addFloatMinField(100);
+
+            // Create a rate validator
+            const rateValidator = new Validator("Interest Rate", rate);
+
+            // Make the field required
+            rateValidator.addRequiredField()
+
+            // Make the field required
+            rateValidator.addRequiredFloatField();
+
+            // make the fields maximum value 100
+            rateValidator.addFloatMaxField(100);
+
+            // Create a variable named errorLog and set it to an empty array
+            let errorLog = [];
+
+            // If the monthlyValidator.validate() function response is false
+            if (!monthlyPaymentValidator.validate()) {
+                // Iterate and push each message to the errorLog 
+                for (const msg of monthlyPaymentValidator.messages) {
+                    errorLog.push(msg);
+                }
+            }
+
+
+            //  if the response is false, push each message to the errorLog variable.
+            if (!rateValidator.validate()) {
+                for (var message of rateValidator.messages) {
+                    errorLog.push(message);
+                }
+            }
+
+            // If the response of the rateValidator.validate() function is false
+            if (monthlyPaymentValidator.validate() && rateValidator.validate()) {
+                errorLogEl.innerHTML = '';
+                const futureValue = FinanceCalculator.calculateFutureValue(monthlyPayment, rate, years);
+                document.getElementById('futureValue').innerHTML = `The future value is ${futureValue}`;
+            } else {
+                errorLogEl.innerHTML = '';
+                let errorLogMessage = '<ul>';
+                for (const error of errorLog) {
+                    errorLogMessage += `<li>${error}</li>`;
+                }
+                errorLogMessage += '</ul>';
+                errorLogEl.innerHTML = errorLogMessage;
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -17,3 +17,4 @@ class CartComponent extends HTMLElement {
 }
 
 customElements.define('cart-component', CartComponent);
+
