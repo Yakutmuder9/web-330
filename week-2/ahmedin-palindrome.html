@@ -9,130 +9,132 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>WEB 330 – Enterprise JavaScript II</title>
 
     <!-- CSS styel -->
-    <link rel="stylesheet" type="text/css" href="./ahmedin-palindrome.css">
-   
-    
+    <link rel="stylesheet" type="text/css" href="./ahmedin-palindrome.css" />
+
     <!-- Google fonts for Oswald -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body class="light-theme">
+  <body class="light-theme">
     <div id="container">
-        <!-- page title -->
-        <h1 class="app-header">Welcome to the Palindrome App!</h1>
+      <!-- page title -->
+      <h1 class="app-header">Welcome to the Palindrome App!</h1>
 
-        <!-- open alert modal when a button is clicked.-->
-        <div class="card">
-            <div class="card-title">
-                Palindrome Checker
-            </div>
+      <!-- open alert modal when a button is clicked.-->
+      <div class="card">
+        <div class="card-title">Palindrome Checker</div>
 
-            <!--  value insertion form -->
-            <div class="card-content">
-                <div class="form">
-                    <div class="form-field">
-                        <label for="txtPhrase">Phrase value:</label>
-                        <input type="text" id="txtPhrase" class="input" name="txtMyPhrase" />
-                    </div>
-                    <div class="form-field">
-                        <button type="submit" class="btn btn-primary full-width" id="btnCheckPhrase">Check
-                            Phrase</button>
-                    </div>
-                </div>
+        <!--  value insertion form -->
+        <div class="card-content">
+          <div class="form">
+            <div class="form-field">
+              <label for="txtPhrase">Phrase value:</label>
+              <input
+                type="text"
+                id="txtPhrase"
+                class="input"
+                name="txtMyPhrase"
+              />
             </div>
+            <div class="form-field">
+              <button
+                type="submit"
+                class="btn btn-primary full-width"
+                id="btnCheckPhrase"
+              >
+                Check Phrase
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
 
+      <footer>
+        <!-- return to home page -->
+        <a href="https://yakutmuder9.github.io/web-330">Return</a>
+      </footer>
 
-        <footer>
-            <!-- return to home page -->
-            <a href="https://yakutmuder9.github.io/web-330">Return</a>
-        </footer>
+      <!-- Converted value show up card -->
+      <div class="card">
+        <div class="card-title">Palindrome Results</div>
+        <br />
 
-
-        <!-- Converted value show up card -->
-        <div class="card">
-            <div class="card-title">
-                Palindrome Results
-            </div>
-            <br />
-
-            <!-- changed value -->
-            <div class="card-content">
-                <div id="assign-results-header"></div>
-                <div class="assign-results-text" id="assign-results"></div>
-            </div>
+        <!-- changed value -->
+        <div class="card-content">
+          <div id="assign-results-header"></div>
+          <div class="assign-results-text" id="assign-results"></div>
         </div>
-
+      </div>
     </div>
 
     <script>
-        // Create a new JavaScript date with the parameter “en-US”
-        function getTodaysDate() {
-            return new Date().toLocaleDateString("en-US");
+      // Create a new JavaScript date with the parameter “en-US”
+      function getTodaysDate() {
+        return new Date().toLocaleDateString("en-US");
+      }
+
+      // Get length of the string that we get from input
+      function getLength(str) {
+        return str.length;
+      }
+
+      // Reverse string that we get from input
+      function reverse(str) {
+        let charArray = str.split("");
+        charArray.reverse();
+        return charArray.join("");
+      }
+
+      // Check the reverse and the input string and return boolean
+      function isPalindrome(str) {
+        // Check if the input string is a palindrome
+        if (str === reverse(str)) {
+          return true;
+        } else {
+          return false;
         }
+      }
 
-        // Get length of the string that we get from input
-        function getLength(str) {
-            return str.length;
-        }
+      // code to be executed when the element with the Check Phrase button is clicked
+      document.getElementById("btnCheckPhrase").onclick = function () {
+        // Get the input string
+        const txtPhrase = document.getElementById("txtPhrase").value;
+        const assignResults = document.getElementById("assign-results");
+        const assignResultsHeader = document.getElementById(
+          "assign-results-header"
+        );
 
-        // Reverse string that we get from input
-        function reverse(str) {
-            let charArray = str.split('');
-            charArray.reverse();
-            return charArray.join('');
-        }
+        // Create a variable named today and called getTodaysDate()
+        let today = getTodaysDate();
+        let len = getLength(txtPhrase);
 
-        // Check the reverse and the input string and return boolean
-        function isPalindrome(str) {
-            // Check if the input string is a palindrome
-            if (str === reverse(str)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+        // variable created and called reverse()function
+        let reversedPhrase = reverse(txtPhrase);
 
-         // code to be executed when the element with the Check Phrase button is clicked
-        document.getElementById("btnCheckPhrase").onclick = function () {
-        
-            // Get the input string
-            const txtPhrase = document.getElementById('txtPhrase').value
-            const assignResults = document.getElementById('assign-results')
-            const assignResultsHeader = document.getElementById('assign-results-header')
-
-            // Create a variable named today and called getTodaysDate()
-            let today = getTodaysDate();
-            let len = getLength(txtPhrase);
-
-            // variable created and called reverse()function
-            let reversedPhrase = reverse(txtPhrase);
-            
-            // Create a string variable with named header
-            let header = `Date: ${today} <br> 
+        // Create a string variable with named header
+        let header = `Date: ${today} <br> 
                          Original Phrase: ${txtPhrase} <br> 
                          reversed Phrase: ${reversedPhrase} <br> 
                          Phrase Length: ${len}`;
 
-                        // set the header varible to the assign-results-header div using
-                         assignResultsHeader.innerHTML = header;
+        // set the header varible to the assign-results-header div using
+        assignResultsHeader.innerHTML = header;
 
-
-             // Display the result
-            if (isPalindrome(txtPhrase.toLowerCase())) {
-                assignResults.innerHTML = `${txtPhrase} <strong><u>is</u></strong> a palindrome!`
-            } else {
-                assignResults.innerHTML = `${txtPhrase} <strong><u>is not</u></strong> a palindrome!`
-            }
-        };
+        // Display the result
+        if (isPalindrome(txtPhrase.toLowerCase())) {
+          assignResults.innerHTML = `${txtPhrase} <strong><u>is</u></strong> a palindrome!`;
+        } else {
+          assignResults.innerHTML = `${txtPhrase} <strong><u>is not</u></strong> a palindrome!`;
+        }
+      };
     </script>
-
-</body>
-
+  </body>
 </html>

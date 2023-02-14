@@ -85,3 +85,10 @@
 .full-width {
     width: 100%;
 }
+
+
+@media(max-width: 720px) {
+    .card {
+      width: 100% !important;
+    }
+}
